@@ -1,0 +1,16 @@
+services:
+  fident-db:
+    image: postgres:15-alpine
+    container_name: fident-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: fident_db
+      POSTGRES_USER: adm
+      POSTGRES_PASSWORD: 123
+    ports:
+      - "5432:5432"
+    volumes:
+      - fident-db-data:/var/lib/postgresql/data
+
+volumes:
+  fident-db-data:
