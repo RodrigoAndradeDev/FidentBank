@@ -1,6 +1,7 @@
-package dev.Rodrigo.fidentBank.model;
+package dev.rodrigo.fidentbank.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,9 +9,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_usuario")
+@Getter
+@Setter
+@NoArgsConstructor
  public class Usuario {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +30,13 @@ import jakarta.persistence.Table;
     private String email;
     
     @Column(name = "data_nascimento", nullable = false)
-    private int dataNascimento;
+    private LocalDate dataNascimento;
     
     @Column(name = "cpf", nullable = false, unique = true, length = 11)
     private String cpf;
     
     @Column(name = "data_conta", nullable = false)
-    private Date dataConta;
+    private LocalDateTime dataConta;
 
     @Column(name = "telefone", nullable = false, length = 11)
     private String telefone;
@@ -55,6 +62,15 @@ import jakarta.persistence.Table;
 
  @Column -
 
+
+ @Getter -
+ 
+ 
+ @Setter -
+ 
+ 
+ @NoArgsConstructor -
+
  
  strategy -
 
@@ -68,6 +84,7 @@ import jakarta.persistence.Table;
  
 
  nullable -
+ 
 
 
  length -
