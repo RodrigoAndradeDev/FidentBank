@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 
-public record UsuarioRequestDTO (
+public record UsuarioRequestDto (
     @NotBlank(message = "O nome é obrigatório")
     String nome,
     

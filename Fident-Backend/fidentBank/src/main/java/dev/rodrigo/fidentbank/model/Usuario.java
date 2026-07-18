@@ -9,12 +9,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_usuario")
+@Builder
+@AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
@@ -61,33 +65,33 @@ import lombok.Setter;
  Conecta uma classe a tabela do banco de dados, define esquemas e nomes
 
  @Column -
-mapeia um atributo da classe a outra coluna do banco de dados, alem de definir regras 
+ mapeia um atributo da classe a outra coluna do banco de dados, alem de definir regras 
 
  @Getter -
- cria automaticamente os métodos para ler os valores de variáveis privadas
+ Cria automaticamente os métodos para ler os valores de variáveis privadas
  
  @Setter -
- gera metodoso para atributos da sua classe 
+ Gera metodos para atributos da sua classe 
  
  @NoArgsConstructor -
- essa notaçao serve pra economizar tempo e evitar a digitaçao do codigo manualmente 
+ Essa notaçao serve pra economizar tempo e evitar a digitaçao do codigo manualmente 
  
  strategy -
-permite escolher diferentes regras 
+ Permite escolher diferentes regras 
 
  unique -
- fazer que algo n repita
+ Fazer algo ser unico, nao se repete!
 
 
  name -
- indentificadores de dados a classe
+ Indentificadores de dados a classe
  
 
  nullable -
- indica que algo n aponta nada referente 
+ Indica que algo n aponta nada referente 
 
 
  length -
- usado pra saber o tomanho de um elemento 
+ Usado pra saber o tomanho de um elemento 
 
  */

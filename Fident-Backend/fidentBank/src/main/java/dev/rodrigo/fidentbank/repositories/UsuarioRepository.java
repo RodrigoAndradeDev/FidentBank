@@ -11,5 +11,9 @@ import dev.rodrigo.fidentbank.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    Optional<Usuario> findByCpf(String cpf);
+    boolean findByCpf(String cpf);
+
+    boolean findByEmail(String email);
+
+    
 }
