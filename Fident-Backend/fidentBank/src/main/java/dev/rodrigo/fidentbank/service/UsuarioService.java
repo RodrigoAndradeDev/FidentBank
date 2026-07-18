@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import dev.rodrigo.fidentbank.dto.UsuarioRequestDto;
 import dev.rodrigo.fidentbank.model.Usuario;
-import dev.rodrigo.fidentbank.model.Usuario.UsuarioBuilder;
 import dev.rodrigo.fidentbank.repositories.ContaRepository;
 import dev.rodrigo.fidentbank.repositories.UsuarioRepository;
 
@@ -33,14 +32,14 @@ public class UsuarioService {
 
     //metodo usado para verificar se o cpf ja existe no banco de dados, caso exista ele retorna uma exceção!
     private void avaliadorCpf(String cpf){
-        if(usuarioRepository.findByCpf(cpf)){
+        if(usuarioRepository.existsByCpf(cpf)){
             throw new RuntimeException("CPF já cadastrado");
         }
     }
 
     //metodo usado para verificar se o email ja existe no banco de dados, caso exista ele retorna uma exceção!
     private void avaliadorEmail(String email){
-        if(usuarioRepository.findByCpf(email)){
+        if(usuarioRepository.existsByEmail(email)){
             throw new RuntimeException("Email já cadastrado");
         }
     }
