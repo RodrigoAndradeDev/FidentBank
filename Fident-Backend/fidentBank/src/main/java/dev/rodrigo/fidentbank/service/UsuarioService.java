@@ -11,7 +11,6 @@ import dev.rodrigo.fidentbank.repositories.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-<<<<<<< HEAD
     
     private final UsuarioRepository usuarioRepository;
     private final ContaRepository contaRepository;
@@ -58,8 +57,4 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
     }
 
-=======
-    //BasicTextEncryptor textEncryptor = new BasicTextEncryptor(); 
-   // textEncryptor.setPasswordCharArray
->>>>>>> a4f253de09190a7d8440020ada7666e1aa0921f6
 }
