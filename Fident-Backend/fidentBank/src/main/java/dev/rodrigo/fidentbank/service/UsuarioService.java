@@ -24,6 +24,7 @@ public class UsuarioService {
     public void criarUsuario(UsuarioRequestDto dto){
         avaliadorCpf(dto.cpf());
         avaliadorEmail(dto.email());
+        criptografarPin(dto);
         aplicadorDeDados(dto);
     }
 
@@ -56,10 +57,20 @@ public class UsuarioService {
         .build();
         usuarioRepository.save(usuario);
     }
+    
+    public void criptografarPin(UsuarioRequestDto dto){ 
+    BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+    textEncryptor.setPasswordCharArray("senha-de-seguranca".toCharArray());
 
-    //BasicTextEncryptor textEncryptor = new BasicTextEncryptor(); 
-   // textEncryptor.setPasswordCharArray
 
+    String textoCriptografado = textEncryptor.encrypt(dto.pin());
+
+    System.out.println(textoCriptografado); 
+
+    System.out.println(textEncryptor.decrypt(textoCriptografado));
+    }
+    
 }
+
 
 

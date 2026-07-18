@@ -1,5 +1,7 @@
 package dev.Rodrigo.fidentBank.service;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import java.time.LocalDate;
 
 import org.junit.Before;
@@ -38,6 +40,7 @@ public class UsuarioServiceTest {
         UsuarioRequestDto dto = new UsuarioRequestDto("Rodrigo",LocalDate.of(2006,11,04), "rodrigo@gmail.com", "12345678901", "99999999999", "12534");
         Mockito.when(usuarioRepository.existsByEmail(dto.email())).thenReturn(false);
         Mockito.when(usuarioRepository.existsByCpf(dto.cpf())).thenReturn(false);
+        
     
         usuarioService.criarUsuario(dto);
         Mockito.verify(usuarioRepository, Mockito.times(1)).save(Mockito.any(Usuario.class));
@@ -45,4 +48,17 @@ public class UsuarioServiceTest {
     
     }
 
+    @Test
+    public void deveCriptografarEDescriptografarPinComSucesso() {
+        // Arrange (Configuração)
+        UsuarioService service = usuarioService;
+        UsuarioRequestDto dto = new UsuarioRequestDto("Rodrigo",LocalDate.of(2006,11,04), "rodrigo@gmail.com", "12345678901", "99999999999", "15452");
+
+        // Act & Assert (Execução e Verificação)
+        // Como o seu método é "void" e só printa na tela, você só chama ele aqui
+        assertDoesNotThrow(() -> service.criptografarPin(dto));
+    }
 }
+
+
+
