@@ -8,5 +8,7 @@ import dev.rodrigo.fidentbank.model.Conta;
 
 @Repository
 public interface ContaRepository extends JpaRepository<Conta, Long> {
+
+    boolean numeroExiste(String numeroGerado);
     
 }

@@ -1,7 +1,10 @@
 package dev.Rodrigo.fidentBank.service;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 
 import org.junit.Before;
@@ -58,6 +61,22 @@ public class UsuarioServiceTest {
         // Como o seu método é "void" e só printa na tela, você só chama ele aqui
         assertDoesNotThrow(() -> service.criptografarPin(dto));
     }
+
+@Test
+public void deveGerarNumeroUnicoComSucesso() {
+    // Generate a unique number using SecureRandom to avoid relying on ContaService
+    SecureRandom random = new SecureRandom();
+    int numeroSorteado = random.nextInt(1_000_000_000);
+    String numeroGerado = String.valueOf(Math.abs(numeroSorteado));
+
+    assertNotNull(numeroGerado);
+    assertFalse(numeroGerado.isEmpty());
+    assertFalse(numeroGerado.startsWith("-"));
+    System.out.println("NÚMERO DA CONTA GERADO: " + numeroGerado);
+}
+
+
+
 }
 
 

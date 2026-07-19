@@ -8,6 +8,7 @@ import dev.rodrigo.fidentbank.model.Usuario;
 import dev.rodrigo.fidentbank.repositories.ContaRepository;
 import dev.rodrigo.fidentbank.repositories.UsuarioRepository;
 
+import java.security.SecureRandom;
 @Service
 public class UsuarioService {
  
@@ -69,8 +70,32 @@ public class UsuarioService {
 
     System.out.println(textEncryptor.decrypt(textoCriptografado));
     }
-    
+    public void geradorNumeroDeConta  (UsuarioRequestDto dto){
+        
+
+    }
+
+    public String gerarNumeroUnico() {
+    String numeroGerado;
+    boolean jaExiste;
+
+    do {
+        // Gera um número aleatório de até 10 dígitos (entre 0 e 4.294.967.295)
+        long minimo = 0L;
+        long maximo = 9999999999L; // 10 dígitos
+        long numero = minimo + (long) (Math.random() * (maximo - minimo + 1));
+        numeroGerado = String.valueOf(numero);
+
+        // Aqui você faz a consulta no seu Repository do banco de dados
+        jaExiste = contaRepository.numeroExiste(numeroGerado);
+
+    } while (jaExiste); // Se já existir no banco, o loop roda de novo e gera outro
+
+    return numeroGerado;
+ }
 }
+    
+
 
 
 
