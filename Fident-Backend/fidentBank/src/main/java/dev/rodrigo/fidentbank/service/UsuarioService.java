@@ -74,6 +74,7 @@ public class UsuarioService {
         criarContaUsuario(usuario, numeroConta);
     }
     
+    //metodo usado para criptografar o pin do usuario utilizando o BCryptPasswordEncoder!
     private String criptografarPin(String pin){ 
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -83,7 +84,7 @@ public class UsuarioService {
         return pinCriptografado;
     }
     
-
+    //metodo usado para gerar um numero unico para a conta do usuario, caso o numero ja exista ele gera outro numero ate encontrar um numero unico!
     private String gerarNumeroUnico() {
     String numeroGerado;
     boolean jaExiste;
@@ -94,7 +95,7 @@ public class UsuarioService {
         numeroGerado = String.valueOf(numero);
 
         jaExiste = contaRepository.numeroExiste(numeroGerado);
-
+        System.out.println("Número gerado: " + numeroGerado + ", já existe: " + jaExiste);
     } while (jaExiste); 
     return numeroGerado;
  }
