@@ -1,13 +1,17 @@
 package dev.rodrigo.fidentbank.service;
 
-import org.jasypt.util.text.BasicTextEncryptor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import dev.rodrigo.fidentbank.dto.UsuarioRequestDto;
+import dev.rodrigo.fidentbank.dto.UsuarioResponseDto;
+import dev.rodrigo.fidentbank.model.Conta;
 import dev.rodrigo.fidentbank.model.Usuario;
 import dev.rodrigo.fidentbank.repositories.ContaRepository;
 import dev.rodrigo.fidentbank.repositories.UsuarioRepository;
 
+import java.math.BigDecimal;
 import java.security.SecureRandom;
 @Service
 public class UsuarioService {
@@ -21,16 +25,25 @@ public class UsuarioService {
         this.contaRepository = contaRepository;
     }
 
-    
-    public void criarUsuario(UsuarioRequestDto dto){
+    @Transactional
+    public UsuarioResponseDto criarUsuario(UsuarioRequestDto dto){
         avaliadorCpf(dto.cpf());
         avaliadorEmail(dto.email());
-        criptografarPin(dto);
-        aplicadorDeDados(dto);
+        String numeroConta = gerarNumeroUnico();
+        aplicadorDeDados(dto, numeroConta);
+        
+        return new UsuarioResponseDto("Usuário criado com sucesso!", dto.nome(), numeroConta);
     }
 
-    
 
+    private void criarContaUsuario(Usuario usuario, String numeroConta){
+        Conta conta = new Conta();
+        conta.setNumeroConta(numeroConta);
+        conta.setUsuario(usuario);
+        conta.setSaldo(new BigDecimal("1500"));
+        contaRepository.save(conta);
+
+    }
 
     //metodo usado para verificar se o cpf ja existe no banco de dados, caso exista ele retorna uma exceção!
     private void avaliadorCpf(String cpf){
@@ -47,50 +60,42 @@ public class UsuarioService {
     }
 
     //metodo usado para aplicar os dados do dto no banco de dados utilizando o builder do usuario!
-    private void aplicadorDeDados(UsuarioRequestDto dto){
+    private void aplicadorDeDados(UsuarioRequestDto dto, String numeroConta){
+        String pinCriptografado = criptografarPin(dto.pin());
         Usuario usuario = Usuario.builder()
         .nome(dto.nome())
         .dataNascimento(dto.dataNascimento())
         .email(dto.email())
         .cpf(dto.cpf())
         .telefone(dto.telefone())
-        .pin(dto.pin())
+        .pin(pinCriptografado)
         .build();
         usuarioRepository.save(usuario);
+        criarContaUsuario(usuario, numeroConta);
     }
     
-    public void criptografarPin(UsuarioRequestDto dto){ 
-    BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
-    textEncryptor.setPasswordCharArray("senha-de-seguranca".toCharArray());
+    private String criptografarPin(String pin){ 
 
-
-    String textoCriptografado = textEncryptor.encrypt(dto.pin());
-
-    System.out.println(textoCriptografado); 
-
-    System.out.println(textEncryptor.decrypt(textoCriptografado));
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String pinCriptografado = encoder.encode(pin);
+        System.out.println("PIN CRIPTOGRAFADO: " + pinCriptografado);
+    
+        return pinCriptografado;
     }
-    public void geradorNumeroDeConta  (UsuarioRequestDto dto){
-        
+    
 
-    }
-
-    public String gerarNumeroUnico() {
+    private String gerarNumeroUnico() {
     String numeroGerado;
     boolean jaExiste;
-
+    SecureRandom random = new SecureRandom();
+    
     do {
-        // Gera um número aleatório de até 10 dígitos (entre 0 e 4.294.967.295)
-        long minimo = 0L;
-        long maximo = 9999999999L; // 10 dígitos
-        long numero = minimo + (long) (Math.random() * (maximo - minimo + 1));
+        long numero = random.nextLong(1000000000L, 9999999999L);
         numeroGerado = String.valueOf(numero);
 
-        // Aqui você faz a consulta no seu Repository do banco de dados
         jaExiste = contaRepository.numeroExiste(numeroGerado);
 
-    } while (jaExiste); // Se já existir no banco, o loop roda de novo e gera outro
-
+    } while (jaExiste); 
     return numeroGerado;
  }
 }
