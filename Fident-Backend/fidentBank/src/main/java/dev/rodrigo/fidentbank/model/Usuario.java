@@ -45,7 +45,7 @@ import lombok.Setter;
     @Column(name = "telefone", nullable = false, length = 11)
     private String telefone;
 
-    @Column(name = "pin", nullable = false, length = 5)
+    @Column(name = "pin", nullable = false, length = 200)
     private String pin;
  }
 

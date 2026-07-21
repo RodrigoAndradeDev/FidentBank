@@ -13,6 +13,7 @@ import dev.rodrigo.fidentbank.repositories.UsuarioRepository;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
 @Service
 public class UsuarioService {
  
@@ -41,7 +42,9 @@ public class UsuarioService {
         conta.setNumeroConta(numeroConta);
         conta.setUsuario(usuario);
         conta.setSaldo(new BigDecimal("1500"));
+        conta.setLimite(new BigDecimal("500"));
         contaRepository.save(conta);
+        
 
     }
 
@@ -69,6 +72,7 @@ public class UsuarioService {
         .cpf(dto.cpf())
         .telefone(dto.telefone())
         .pin(pinCriptografado)
+        .dataConta(LocalDateTime.now())
         .build();
         usuarioRepository.save(usuario);
         criarContaUsuario(usuario, numeroConta);
@@ -94,7 +98,7 @@ public class UsuarioService {
         long numero = random.nextLong(1000000000L, 9999999999L);
         numeroGerado = String.valueOf(numero);
 
-        jaExiste = contaRepository.numeroExiste(numeroGerado);
+        jaExiste = contaRepository.existsByNumeroConta(numeroGerado);
         System.out.println("Número gerado: " + numeroGerado + ", já existe: " + jaExiste);
     } while (jaExiste); 
     return numeroGerado;

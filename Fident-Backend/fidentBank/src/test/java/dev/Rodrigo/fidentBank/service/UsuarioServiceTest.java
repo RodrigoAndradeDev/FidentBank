@@ -75,7 +75,7 @@ public class UsuarioServiceTest {
         UsuarioRequestDto dto = new UsuarioRequestDto("Rodrigo",LocalDate.of(2006,11,04), "rodrigo@gmail.com", "12345678901", "99999999999", "11115");
         Mockito.when(usuarioRepository.existsByEmail(Mockito.anyString())).thenReturn(false);
         Mockito.when(usuarioRepository.existsByCpf(Mockito.anyString())).thenReturn(false);
-        Mockito.when(contaRepository.numeroExiste(Mockito.anyString())).thenReturn(false);
+        Mockito.when(contaRepository.existsByNumeroConta(Mockito.anyString())).thenReturn(false);
 
         usuarioService.criarUsuario(dto);
 

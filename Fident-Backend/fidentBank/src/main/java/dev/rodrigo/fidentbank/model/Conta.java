@@ -39,7 +39,7 @@ public class Conta {
     @Column(name = "saldo", nullable = false)
     private BigDecimal saldo;
 
-    @Column(name = "limite", nullable = false)
+    @Column(name = "limite")
     private BigDecimal limite;
     
 }

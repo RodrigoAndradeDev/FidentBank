@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.rodrigo.fidentbank.dto.UsuarioRequestDto;
 import dev.rodrigo.fidentbank.dto.UsuarioResponseDto;
 import dev.rodrigo.fidentbank.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -21,7 +22,7 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<UsuarioResponseDto> CadastrarUsuario(@RequestBody UsuarioRequestDto dto) {
+    public ResponseEntity<UsuarioResponseDto> CadastrarUsuario(@RequestBody @Valid UsuarioRequestDto dto) {
         UsuarioResponseDto resultado =usuarioService.criarUsuario(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(resultado);
     }
