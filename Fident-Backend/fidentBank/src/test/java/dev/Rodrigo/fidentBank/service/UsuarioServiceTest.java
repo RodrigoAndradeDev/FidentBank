@@ -1,13 +1,10 @@
 package dev.Rodrigo.fidentBank.service;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.math.BigDecimal;
-import java.security.SecureRandom;
 import java.time.LocalDate;
 
 import org.junit.Before;

@@ -100,50 +100,9 @@ public class UsuarioService {
 
         jaExiste = contaRepository.existsByNumeroConta(numeroGerado);
         System.out.println("Número gerado: " + numeroGerado + ", já existe: " + jaExiste);
-    } while (jaExiste); 
+    } while (jaExiste);
     return numeroGerado;
  }
-@Entity
-@Table(name = "tb_contas")
-public class Conta {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, unique = true)
-    private String numeroConta;
-
-    // Ajuste do Saldo para BigDecimal
-    @Column(nullable = false, precision = 19, scale = 4)
-    private BigDecimal saldo = BigDecimal.ZERO;
-
-    public Conta() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNumeroConta() {
-        return numeroConta;
-    }
-
-    public void setNumeroConta(String numeroConta) {
-        this.numeroConta = numeroConta;
-    }
-
-    public BigDecimal getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(BigDecimal saldo) {
-        this.saldo = saldo;
-    }
-}
 }
     
 
