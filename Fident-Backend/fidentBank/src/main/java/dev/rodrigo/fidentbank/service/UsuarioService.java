@@ -4,6 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import dev.rodrigo.fidentbank.dto.UsuarioRequestDto;
 import dev.rodrigo.fidentbank.dto.UsuarioResponseDto;
 import dev.rodrigo.fidentbank.model.Conta;
@@ -11,9 +12,7 @@ import dev.rodrigo.fidentbank.model.Usuario;
 import dev.rodrigo.fidentbank.repositories.ContaRepository;
 import dev.rodrigo.fidentbank.repositories.UsuarioRepository;
 import java.math.BigDecimal;
-import jakarta.persistence.*;
 import java.security.SecureRandom;
-import java.time.LocalDateTime;
 @Service
 public class UsuarioService {
  
@@ -103,7 +102,11 @@ public class UsuarioService {
     } while (jaExiste);
     return numeroGerado;
  }
+
+
+
 }
+
     
 
 
