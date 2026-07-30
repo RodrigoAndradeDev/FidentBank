@@ -169,6 +169,3 @@ Desenvolvido por **Rodrigo Andrade** *Estudante de Engenharia de Software na UCS
 * **LinkedIn:** [Rodrigo Andrade](https://www.google.com/search?q=https://www.linkedin.com/in/)
 * **E-mail:** [rodrigo.anddev@gmail.com](https://www.google.com/search?q=mailto%3Arodrigo.anddev%40gmail.com)
 
----
-
-Deu certo copiando pelo botãozinho e colando na área de código do GitHub?
