@@ -1,7 +1,7 @@
 package dev.rodrigo.fidentbank.dto;
 
 public record UsuarioResponseDto(
-    String nmensagem,
+    String mensagem,
     String nome,
     String numeroConta
 ) {
