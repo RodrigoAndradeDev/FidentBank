@@ -16,7 +16,6 @@ public class ContaService {
        return contaRepository.findByNumeroConta(numeroConta).orElseThrow(() -> new IllegalArgumentException("Conta não encontrada com o número: " + numeroConta));
     }
 
-    public Conta buscarTodasContas() {
-        return contaRepository.findAll()
+    
 
 }
