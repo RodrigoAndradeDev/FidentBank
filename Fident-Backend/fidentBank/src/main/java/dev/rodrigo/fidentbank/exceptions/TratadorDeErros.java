@@ -13,7 +13,10 @@ import java.util.List;
 @RestControllerAdvice
 public class TratadorDeErros {
 
-
+    /*
+    metodo de captação de erros nos quais o dado nao é compativel "dez" em um inteiro,
+    devolve uma resposta com o formato do ErroPadraoDto amigavel!
+    */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErroPadraoDto> tratarErroDeLeitura(HttpMessageNotReadableException ex) {
         
@@ -33,7 +36,7 @@ public class TratadorDeErros {
         List<FieldError> erros = ex.getFieldErrors();
         return ResponseEntity.badRequest().body(erros.stream().map(DadosErroValidacao::new).toList());
     }
-
+    
 
     public record DadosErroValidacao(String campo, String mensagem) {
         public DadosErroValidacao(FieldError erro) {

@@ -29,4 +29,11 @@ public class ContaController {
         return ResponseEntity.ok(responseDto);
     }
 
+    @GetMapping()
+    public ResponseEntity<conta> buscarTodasContas() {
+        Conta conta = contaService.buscarTodasContas();
+        ContaResponseDto responseDto =  new ContaResponseDto(
+                conta.getUsuario().getNome(),
+    }
+
 }
