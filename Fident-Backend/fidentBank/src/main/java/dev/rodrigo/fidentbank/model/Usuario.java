@@ -1,7 +1,6 @@
 package dev.rodrigo.fidentbank.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,8 +23,8 @@ import lombok.Setter;
 @NoArgsConstructor
  public class Usuario {
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+   @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -47,6 +46,9 @@ import lombok.Setter;
 
     @Column(name = "senha", nullable = false)
     private String senha;
+
+    @Column(name = "role", nullable = false)
+    private String role;
  }
 
 

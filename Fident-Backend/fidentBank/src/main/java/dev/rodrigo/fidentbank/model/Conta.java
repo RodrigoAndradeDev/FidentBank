@@ -31,8 +31,8 @@ import lombok.Setter;
 public class Conta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @Column(name = "numero_conta", nullable = false, unique = true)
     private String numeroConta;

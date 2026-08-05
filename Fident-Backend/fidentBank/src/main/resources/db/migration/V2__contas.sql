@@ -1,5 +1,5 @@
 CREATE TABLE tb_conta(
-    id BIGSERIAL PRIMARY KEY,
+    id TEXT PRIMARY KEY NOT NULL UNIQUE,
     numero_conta VARCHAR(20) NOT NULL UNIQUE,
     saldo DECIMAL(15, 2) NOT NULL,
     limite DECIMAL(15, 2),
