@@ -1,29 +1,31 @@
 package dev.rodrigo.fidentbank.service;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+
 import dev.rodrigo.fidentbank.dto.UsuarioRequestDto;
 import dev.rodrigo.fidentbank.dto.UsuarioResponseDto;
 import dev.rodrigo.fidentbank.model.Conta;
 import dev.rodrigo.fidentbank.model.Usuario;
+import dev.rodrigo.fidentbank.model.UsuarioRole;
 import dev.rodrigo.fidentbank.repositories.ContaRepository;
 import dev.rodrigo.fidentbank.repositories.UsuarioRepository;
+import lombok.RequiredArgsConstructor;
+
 import java.math.BigDecimal;
 import java.security.SecureRandom;
+@RequiredArgsConstructor
 @Service
 public class UsuarioService {
  
     
     private final UsuarioRepository usuarioRepository;
     private final ContaRepository contaRepository;
-
-    public UsuarioService(UsuarioRepository usuarioRepository, ContaRepository contaRepository) {
-        this.usuarioRepository = usuarioRepository;
-        this.contaRepository = contaRepository;
-    }
+    private final BCryptPasswordEncoder passwordEncoder;
+    
 
     @Transactional
     public UsuarioResponseDto criarUsuario(UsuarioRequestDto dto){
@@ -63,7 +65,8 @@ public class UsuarioService {
 
     //metodo usado para aplicar os dados do dto no banco de dados utilizando o builder do usuario!
     private void aplicadorDeDados(UsuarioRequestDto dto, String numeroConta){
-        String pinCriptografado = criptografarPin(dto.pin());
+        String pinCriptografado = criptografarDados(dto.pin());
+        String senhaCriptografada = criptografarDados(dto.senha());
         Usuario usuario = Usuario.builder()
         .nome(dto.nome())
         .dataNascimento(dto.dataNascimento())
@@ -71,20 +74,17 @@ public class UsuarioService {
         .cpf(dto.cpf())
         .telefone(dto.telefone())
         .pin(pinCriptografado)
-        .dataConta(LocalDateTime.now())
+        .senha(senhaCriptografada)
+        .role(UsuarioRole.USUARIO)
         .build();
         usuarioRepository.save(usuario);
         criarContaUsuario(usuario, numeroConta);
     }
     
     //metodo usado para criptografar o pin do usuario utilizando o BCryptPasswordEncoder!
-    private String criptografarPin(String pin){ 
-
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String pinCriptografado = encoder.encode(pin);
-        System.out.println("PIN CRIPTOGRAFADO: " + pinCriptografado);
-    
-        return pinCriptografado;
+   
+    private String criptografarDados(String dado){
+        return passwordEncoder.encode(dado);
     }
     
     //metodo usado para gerar um numero unico para a conta do usuario, caso o numero ja exista ele gera outro numero ate encontrar um numero unico!

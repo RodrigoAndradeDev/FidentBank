@@ -44,7 +44,7 @@ public class Conta {
     private BigDecimal limite;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "cliente_id")
     private Usuario usuario;
 
     @Column(name = "ativo", nullable = false)

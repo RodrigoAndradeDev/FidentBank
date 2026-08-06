@@ -36,7 +36,7 @@ public class UsuarioServiceTest {
 
     @Test
     public void deveCriarUsuarioComSucesso() {
-        UsuarioRequestDto dto = new UsuarioRequestDto("Rodrigo", LocalDate.of(2006, 11, 4), "rodrigo@gmail.com", "12345678901", "99999999999", "11115");
+        UsuarioRequestDto dto = new UsuarioRequestDto("Rodrigo", LocalDate.of(2006, 11, 4), "rodrigo@gmail.com", "12345678901", "99999999999", "11115", "1234");
         Mockito.when(usuarioRepository.existsByEmail(dto.email())).thenReturn(false);
         Mockito.when(usuarioRepository.existsByCpf(dto.cpf())).thenReturn(false);
         
@@ -47,7 +47,8 @@ public class UsuarioServiceTest {
 
     @Test
     public void deveCriptografarPin() {
-        UsuarioRequestDto dto = new UsuarioRequestDto("Rodrigo", LocalDate.of(2006, 11, 4), "rodrigo@gmail.com", "12345678901", "99999999999", "11115");
+        UsuarioRequestDto dto = new UsuarioRequestDto("Rodrigo", LocalDate.of(2006, 11, 4), "rodrigo@gmail.com", "12345678901", "99999999999", "11115", "1234");
+        Mockito.when(usuarioRepository.existsByEmail(dto.email())).thenReturn(false);
         Mockito.when(usuarioRepository.existsByEmail(Mockito.anyString())).thenReturn(false);
         Mockito.when(usuarioRepository.existsByCpf(Mockito.anyString())).thenReturn(false);
 
@@ -61,7 +62,8 @@ public class UsuarioServiceTest {
 
     @Test
     public void deveGerarNumeroUnicoComSucesso() {
-        UsuarioRequestDto dto = new UsuarioRequestDto("Rodrigo", LocalDate.of(2006, 11, 4), "rodrigo@gmail.com", "12345678901", "99999999999", "11115");
+        UsuarioRequestDto dto = new UsuarioRequestDto("Rodrigo", LocalDate.of(2006, 11, 4), "rodrigo@gmail.com", "12345678901", "99999999999", "11115", "1234");
+        Mockito.when(usuarioRepository.existsByEmail(dto.email())).thenReturn(false);
         Mockito.when(usuarioRepository.existsByEmail(Mockito.anyString())).thenReturn(false);
         Mockito.when(usuarioRepository.existsByCpf(Mockito.anyString())).thenReturn(false);
         Mockito.when(contaRepository.existsByNumeroConta(Mockito.anyString())).thenReturn(false);

@@ -1,9 +1,17 @@
 package dev.rodrigo.fidentbank.model;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,7 +29,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
- public class Usuario {
+ public class Usuario implements UserDetails {
    @Id
    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -47,53 +55,26 @@ import lombok.Setter;
     @Column(name = "senha", nullable = false)
     private String senha;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private String role;
+    private UsuarioRole role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+      if (this.role == UsuarioRole.ADMIN) {
+        return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+      } else {
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+      }
+    }
+
+    @Override
+    public String getPassword() {
+      return this.senha;
+    }
+
+    @Override
+    public String getUsername() {
+      return this.email;
+    }
  }
-
-
-
- /*
- @Entity -
- Essa anotaçao transforma uma classe java em uma tabela de banco de dados
-
- @ID -
- O indentificador unico (id) diz que um atributo especifico da sua classe é a chave primeiro no banco de dados.Transforma o seu objeto java em uma linha real na tabela   
-
- @GeneratedValue -
- Diz ao spring boot criar e preencher o ID de um registro no banco de dados de forma automtica 
-
- @Table -
- Conecta uma classe a tabela do banco de dados, define esquemas e nomes
-
- @Column -
- mapeia um atributo da classe a outra coluna do banco de dados, alem de definir regras 
-
- @Getter -
- Cria automaticamente os métodos para ler os valores de variáveis privadas
- 
- @Setter -
- Gera metodos para atributos da sua classe 
- 
- @NoArgsConstructor -
- Essa notaçao serve pra economizar tempo e evitar a digitaçao do codigo manualmente 
- 
- strategy -
- Permite escolher diferentes regras 
-
- unique -
- Fazer algo ser unico, nao se repete!
-
-
- name -
- Indentificadores de dados a classe
- 
-
- nullable -
- Indica que algo n aponta nada referente 
-
-
- length -
- Usado pra saber o tomanho de um elemento 
-
- */

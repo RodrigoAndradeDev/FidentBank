@@ -31,6 +31,9 @@ public record UsuarioRequestDto (
     
     @NotBlank(message = "O pin é obrigatório")
     @Size(min = 5, max = 5 , message = "O pin deve ter 5 dígitos")
-    String pin
+    String pin,
+
+    @NotBlank(message = "A senha é obrigatória")
+    String senha
 )
 {}
