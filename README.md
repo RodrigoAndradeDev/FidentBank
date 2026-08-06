@@ -166,6 +166,6 @@ A aplicação estará acessível em `http://localhost:8080`.
 Desenvolvido por **Rodrigo Andrade** *Estudante de Engenharia de Software na UCSAL | Desenvolvedor Java Full Stack*
 
 * **GitHub:** [@RodrigoAndradeDev](https://github.com/RodrigoAndradeDev)
-* **LinkedIn:** [Rodrigo Andrade]([https://www.google.com/search?q=https://www.linkedin.com/in/](https://www.linkedin.com/in/rodrigoadev/))
+* **LinkedIn:** [Rodrigo Andrade](https://www.linkedin.com/in/rodrigoadev/)
 * **E-mail:** [rodrigo.anddev@gmail.com](https://www.google.com/search?q=mailto%3Arodrigo.anddev%40gmail.com)
 
