@@ -167,5 +167,5 @@ Desenvolvido por **Rodrigo Andrade** *Estudante de Engenharia de Software na UCS
 
 * **GitHub:** [@RodrigoAndradeDev](https://github.com/RodrigoAndradeDev)
 * **LinkedIn:** [Rodrigo Andrade](https://www.linkedin.com/in/rodrigoadev/)
-* **E-mail:** [rodrigo.anddev@gmail.com](https://www.google.com/search?q=mailto%3Arodrigo.anddev%40gmail.com)
+* **E-mail:** [rodrigo.anddev@gmail.com](mailto:rodrigo.anddev@gmail.com)
 
